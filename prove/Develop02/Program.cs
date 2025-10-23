@@ -57,8 +57,6 @@ class Program
                     string loadFile = Console.ReadLine();
                     // Calls the method to load the journal entries from the file the user requested.
                     journal.LoadFromFile(loadFile);
-                    // Prints a message to let the user know the file was loaded successfully.
-                    Console.WriteLine("File loaded.\n");
                     break;
 
                 // Option 4: Save

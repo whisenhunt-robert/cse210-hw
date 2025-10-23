@@ -28,7 +28,6 @@ public class Journal
         Entry entry = new Entry();
         entry.SetEntry(date, prompt, response);
         _entries.Add(entry);
-
         Console.WriteLine("Your entry was added successfully.");
     }
 
@@ -81,5 +80,7 @@ public class Journal
                 _entries.Add(entry);
             }
         }
+        // Prints a message to let the user know the file was loaded successfully.
+        Console.WriteLine("File loaded.\n");
     }
 }

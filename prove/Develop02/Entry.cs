@@ -20,8 +20,16 @@ public class Entry
         Console.WriteLine($"{_userInput}\n");
     }
 
-    // stackoverflow helped me know how to do this. I think this makes them public if they have to be, if I understood.
-    public string GetDate() => _date;
-    public string GetPrompt() => _prompt;
-    public string GetUserInput() => _userInput;
+    public string GetDate()
+    {
+        return _date;
+    }
+    public string GetPrompt()
+    {
+        return _prompt;
+    }
+    public string GetUserInput()
+    {
+        return _userInput;
+    }
 }
