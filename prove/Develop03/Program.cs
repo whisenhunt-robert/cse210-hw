@@ -4,6 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        // I tried to include this in the Reference class, but had some issues with is; so I hope it's okay to have this here?
         Reference reference = new Reference("Proverbs", 3, 5, 6);
         string text = "Trust in the Lord with all thine heart; and lean not unto thine own understanding; in all thy ways acknowledge him, and he shall direct thy paths.";
 
@@ -39,6 +40,7 @@ class Program
     }
     
     // Used this to exceed expectations. Prompting the user to choose how many words will be hidden.
+    // Found examples on stackoverflow on how to make this possible.
     private static int GetDifficultyLevel()
     {
         int level = 0;

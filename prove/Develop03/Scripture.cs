@@ -7,6 +7,7 @@ public class Scripture
     private Reference _reference;
     private List<Word> _words;
     // Added this random and int as part of exceeding expectations.
+    // Though I don't think it's really randomizing if it'll show one of multiple verses...
     private Random _rand = new Random();
     private int _difficultyLevel;
 

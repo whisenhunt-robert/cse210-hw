@@ -5,19 +5,11 @@ public class Reference
     private int _startVerse;
     private int _endVerse;
 
-    public Reference(string book, int chapter, int verse)
+    public Reference(string book, int chapter, int verse, int endVerse)
     {
         _book = book;
         _chapter = chapter;
         _startVerse = verse;
-        _endVerse = verse;
-    }
-
-    public Reference(string book, int chapter, int startVerse, int endVerse)
-    {
-        _book = book;
-        _chapter = chapter;
-        _startVerse = startVerse;
         _endVerse = endVerse;
     }
 
