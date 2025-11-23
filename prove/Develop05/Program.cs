@@ -238,7 +238,7 @@ class Program
         {
             _level++;
             Console.WriteLine("\n---- LEVEL UP ----");
-            Console.WriteLine($"You are now Level {_level}!\n");
+            Console.WriteLine($"You are now Level {_level}!");
         }
     }
     
