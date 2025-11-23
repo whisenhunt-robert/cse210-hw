@@ -260,3 +260,7 @@ class Program
         Console.WriteLine("\nMay God be with you till we meet again.\n");
     }
 }
+
+// I feel like I had too much fun working on this project. It gave me experience (pun intended) of problem/puzzle solving.
+// I exceeded expectations by adding a level-up system. In addition, it's supposed to reset each month.
+// Stackoverflow helped me a lot with this project. It's easy to ask questions and search for answers on there.
