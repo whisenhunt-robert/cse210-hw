@@ -331,3 +331,11 @@ class Program
         Environment.Exit(0);
     }
 }
+
+// After finally getting the errors to end, I was finally able run what I had before and finish writing this program.
+// I saw that Program.cs counts as one of the eight required, so I didn't rot my brain on a fifth game. :-)
+// The program works how I wanted it to, thanks to some research of course material and StackOverFlow and w3schools.
+// I plan to eventually come back to this project and make it where the games ask if you wish to play again.
+// I also want to make it where there's a way to go back to the main menu from the game menu. I realized I forgot that.
+// And finally, I wanna add more threading at the end of each game so that the user can see results before the main menu floods.
+// I'm happy that I was able to get this final project to work how I wanted, and I hope you enjoy.
