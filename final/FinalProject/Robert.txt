@@ -1,0 +1,11 @@
+1220
+9
+3675
+SimpleObjective|Test the program|Test the program for errors.|50|True
+SimpleObjective|Win a game of Magic Number.|Earn experience points playing Magic Number.|50|True
+SimpleObjective|Unlock a new game|Reach Lv3 to unlock Higher or Lower.|50|True
+SimpleObjective|Test the Higher or Lower game|Unlock and play the Higher or Lower game to make sure it does what it's supposed to.|50|True
+SimpleObjective|Win a game of Higher or Lower twice in a row|Successfully predict if your number is higher or lower than the CPU's number twice in a row.|50|True
+SimpleObjective|Unlock the Treasure Box game|2|50|True
+SimpleObjective|Test the fixes to Treasure Box|Test the fixes you made to the Treasure Box game.|50|True
+SimpleObjective|Slow down symbols in Treasure Box game|Slow down the symbols in Treasure Box game so it's a little easier.|50|True

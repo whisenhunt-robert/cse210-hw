@@ -17,7 +17,13 @@ class Program
 
     public Program()
     {
+        _games.Clear();
         _games.Add(new MagicNumber("Magic Number", 1));
+        _games.Add(new HigherOrLower("Higher or Lower", 3));
+        _games.Add(new GameThree("Treasure Box", 5));
+        _games.Add(new GameFour("Blackjack", 7));
+        // Placeholder for a fifth game if I decide to expand.
+        // _games.Add(new GameFive("TBD", 10));
     }
 
     public void Run()
@@ -34,7 +40,7 @@ class Program
 
     private void DisplayMainMenu()
     {
-        Console.WriteLine($"Level: {_level} | EXP: {_experience} | Tokens: {_tokens}");
+        Console.WriteLine($"\nLevel: {_level} | EXP: {_experience} | Tokens: {_tokens}");
         Console.WriteLine("~ ~ ~ ~ Main Menu ~ ~ ~ ~");
         Console.WriteLine("1. Objectives");
         Console.WriteLine("2. Games");
@@ -45,8 +51,13 @@ class Program
 
     private int GetChoice()
     {
+        int choice;
         Console.Write("Select a choice from the menu: ");
-        return int.Parse(Console.ReadLine());
+
+        if (!int.TryParse(Console.ReadLine(), out choice))
+            return -1;
+
+        return choice;
     }
 
     public void RunAction(int choice)
@@ -73,8 +84,9 @@ class Program
                 Quit();
                 break;
 
-            default: Console.WriteLine("Invalid options. Please try again.");
-            break;
+            default:
+                Console.WriteLine("Invalid options. Please try again.");
+                break;
         }
     }
 
@@ -82,7 +94,7 @@ class Program
     private void DisplayObjectivesMenu()
     {
         int choice = 0;
-        
+
         while (choice != 3)
         {
             Console.WriteLine($"Level: {_level} | EXP: {_experience} | Tokens: {_tokens}");
@@ -106,8 +118,9 @@ class Program
                 case 3:
                     return;
 
-                default: Console.WriteLine("Invalid option. Please try again.");
-                break;
+                default:
+                    Console.WriteLine("Invalid option. Please try again.");
+                    break;
             }
         }
     }
@@ -139,18 +152,27 @@ class Program
             Console.WriteLine((i + 1) + ". " + _objectives[i].GetStatus());
 
         Console.Write("\nWhich objective did you complete: ");
-        int index = int.Parse(Console.ReadLine());
+        int index = int.Parse(Console.ReadLine()) - 1;
+
+        if (index < 0 || index >= _objectives.Count)
+        {
+            Console.WriteLine("Invalid selection. Please try again.");
+            return;
+        }
 
         int points = _objectives[index].RecordEvent();
         _tokens += points;
 
-        Console.WriteLine("Congratulations! You earned 50 tokens for completing this objective!");
+        if (points > 0)
+        {
+            Console.WriteLine($"Congratulations! You earned {points} tokens for completing this objective!");
+        }
     }
 
     // Games Menu
     private void DisplayGamesMenu()
     {
-        Console.WriteLine($"Level: {_level} | EXP: {_experience} | Tokens: {_tokens}");
+        Console.WriteLine($"\nLevel: {_level} | EXP: {_experience} | Tokens: {_tokens}");
         Console.WriteLine("~ ~ ~ ~ Games Menu ~ ~ ~ ~");
 
         for (int i = 0; i < _games.Count; i++)
@@ -164,10 +186,22 @@ class Program
         }
 
         Console.WriteLine("Please choose a game or press 0 to return to the main menu:");
-        int choice = GetChoice();
+        int choice;
+
+        if (!int.TryParse(Console.ReadLine(), out choice))
+        {
+            Console.WriteLine("Invalid input.");
+            return;
+        }
 
         if (choice == 0)
             return;
+
+        if (choice < 1 || choice > _games.Count)
+        {
+            Console.WriteLine("Invalid selection.");
+            return;
+        }
 
         Game selected = _games[choice - 1];
 
@@ -188,7 +222,7 @@ class Program
         _tokens -= cost;
         int expEarned = selected.Play();
 
-        Console.WriteLine("You earned " + expEarned + "experinece points!");
+        Console.WriteLine($"You earned {expEarned} experience points!");
         AddExperience(expEarned);
     }
 
@@ -222,6 +256,12 @@ class Program
             _level++;
             Console.WriteLine("\n---- LEVEL UP ----");
             Console.WriteLine($"You are now Level {_level}!");
+
+            foreach (Game g in _games)
+            {
+                if (g.LevelRequired == _level)
+                    Console.WriteLine("New game unlocked: " + g.Name);
+            }
         }
     }
 
@@ -248,7 +288,19 @@ class Program
         Console.Write("What is the filename for the goal file? ");
         string file = Console.ReadLine();
 
+        if (!File.Exists(file))
+        {
+            Console.WriteLine("File not found. Please enter a valid file name.");
+            return;
+        }
+
         string[] lines = File.ReadAllLines(file);
+
+        if (lines.Length < 3)
+        {
+            Console.WriteLine("Save file is corrupted.");
+            return;
+        }
 
         _tokens = int.Parse(lines[0]);
         _level = int.Parse(lines[1]);
@@ -258,6 +310,10 @@ class Program
         for (int i = 3; i < lines.Length; i++)
         {
             string[] p = lines[i].Split("|");
+
+            if (p.Length != 5)
+                continue;
+
             SimpleObjective so = new SimpleObjective(
                 p[1],
                 p[2],

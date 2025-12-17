@@ -2,16 +2,16 @@ using System;
 
 public class MagicNumber : Game
 {
+    private static Random _rand = new Random();
     private int _magicNumber;
     private int _attempts;
 
     public MagicNumber(string name, int levelRequired)
         : base(name, levelRequired) { }
-    
+
     public override int Play()
     {
-        Random rand = new Random();
-        _magicNumber = rand.Next(1, 100);
+        _magicNumber = _rand.Next(1, 100);
         _attempts = 0;
 
         Console.WriteLine("\n~ ~ ~ ~ Welcome to Magic Number ~ ~ ~ ~");
@@ -21,8 +21,9 @@ public class MagicNumber : Game
         while (_attempts < 20)
         {
             Console.WriteLine("Please enter a number between 1 and 100: ");
-            
-            if (!int.TryParse(Console.ReadLine(), out int guess))
+
+            int guess;
+            if (!int.TryParse(Console.ReadLine(), out guess))
             {
                 Console.WriteLine("Invalid input. Please try again.");
                 continue;
@@ -40,16 +41,19 @@ public class MagicNumber : Game
         }
 
         Console.WriteLine("\nYou failed to guess the number within' your 20 attempts...");
-        Console.WriteLine($"The Magic Number was: {_magicNumber}! Please try again!");
+        Console.WriteLine($"The Magic Number was {_magicNumber}! Please try again!");
         return 0;
     }
 
-        private int EvaluateAttempts(int attempts)
+    private int EvaluateAttempts(int attempts)
     {
         if (attempts < 5) return 100;
         if (attempts <= 10) return 50;
         return 25;
     }
 
-    public override string GetSaveString() => _name;
+    public override string GetSaveString()
+    {
+        return "";
+    }
 }
